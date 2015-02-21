@@ -13,7 +13,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "lint": "jshint lib test index.js",
+    "test": "npm run-script lint && mocha"
   },
   "files": [
     "index.js"
@@ -24,11 +25,17 @@
     "translation"
   ],
   "dependencies": {
-    "gulp-util": "^3.0.1",
-    "through2": "^0.6.3"
+    "gulp-util": "3.x",
+    "q": "1.1.x",
+    "through2": "0.6.x",
+    "vinyl-fs": "0.3.x"
   },
   "devDependencies": {
+    "chai": "2.x",
+    "gulp": "3.x",
+    "gulp-rimraf": "0.1.x",
     "jsgreat": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "should": "5.x"
   }
 }
