@@ -39,7 +39,7 @@ StaticI18n.prototype.translate = function(done) {
 
   var proms = [
     this.translateFiles('javascript', this.target.path, '/**/*.js'),
-    //this.translateFiles('handlebars', '/**/*.hbs')
+    this.translateFiles('handlebars', this.target.path, '/**/*.hbs')
   ];
 
   q.allSettled(proms)
