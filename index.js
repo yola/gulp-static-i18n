@@ -2,11 +2,13 @@
 
 var fs = require('fs');
 var gutil = require('gulp-util');
-var q = require('q');
 var through = require('through2');
 var vfs = require('vinyl-fs');
 
+var transhbs = require('./lib/translators/handlebars');
+var transjs = require('./lib/translators/javascript');
 var Translator = require('./lib/translator');
+
 var PluginError = gutil.PluginError;
 
 
@@ -18,32 +20,24 @@ function StaticI18n(target, options, stream) {
 }
 
 
-StaticI18n.prototype.translateFiles = function(fileType, target, globPattern) {
-  var deferred = q.defer();
-  var translate = this.translator.getStreamTranslator(fileType);
-  vfs.src(target + globPattern)
-    .pipe(translate)
-    .pipe(vfs.dest(target))
-    .on('end', deferred.resolve);
-  return deferred.promise;
-};
-
-
 StaticI18n.prototype.translate = function(done) {
 
   if(!this.checkTarget(this.target)){
+    done();
     return;
   }
 
-  this.translator = new Translator(this.options);
+  var translator = new Translator(this.options);
+  var translate = translator.getStreamTranslator();
+  var targetPath = this.target.path;
 
-  var proms = [
-    this.translateFiles('javascript', this.target.path, '/**/*.js'),
-    this.translateFiles('handlebars', this.target.path, '/**/*.hbs')
-  ];
+  translator.register(['.js'], transjs);
+  translator.register(['.hbs'], transhbs);
 
-  q.allSettled(proms)
-    .done(function() { done(); });
+  vfs.src(targetPath + '/**/*.*')
+    .pipe(translate)
+    .pipe(vfs.dest(targetPath))
+    .on('end', done);
 
 };
 
