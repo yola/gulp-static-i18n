@@ -5,7 +5,8 @@ var fs = require('fs');
 var statici18n = require('../');
 var stream = require('stream');
 var through = require('through2');
-var Translator = require('../lib/translator.js');
+var Translator = require('../lib/translator');
+var TranslatedFile = require('../lib/translated-file');
 var vfs = require('vinyl-fs');
 
 require('chai').should();
@@ -16,6 +17,7 @@ var appGulp = require(appPath + '/gulpfile');
 
 // unit tests
 
+
 describe('StaticI18n', function(){
 
   it('should throw for null targets', function() {
@@ -25,6 +27,7 @@ describe('StaticI18n', function(){
   });
 
 });
+
 
 describe('Translator', function(){
 
@@ -50,8 +53,8 @@ describe('Translator', function(){
       'window.alert(\'Olá mundo\');\n',
     ];
 
-    var assertTranslation = through.obj(function(msg, enc, callback) {
-      msgs.should.include(msg.translation);
+    var assertTranslation = through.obj(function(file, enc, callback) {
+      msgs.should.include(String(file.contents));
       count += 1;
       this.resume();
       callback();
@@ -94,9 +97,21 @@ describe('Translator', function(){
 });
 
 
+describe('Translated File', function() {
+  it('should be able create lang prefixes from catalog names', function() {
+    var getPrefix = TranslatedFile.getLangPrefix;
+    getPrefix('en', 'en').should.equal('');
+    getPrefix('pt_BR').should.equal('pt-br/');
+    getPrefix('de-Latn_DE-1996').should.equal('de-latn-de-1996/');
+  });
+});
+
+
+
 // integration tests
 
-describe('Static translation of an app', function(){
+
+describe('Static translation of an app', function() {
 
   before(function(done){
     appGulp.start('default', done);
@@ -111,13 +126,14 @@ describe('Static translation of an app', function(){
   });
 
   it('should knockout gettext calls from the js', function () {
-    var expected = 'window.alert("Hello World");\n';
+    var expected = 'window.alert(\'Hello World\');\n';
     var content = fs.readFileSync(appPath + '/build/script.js').toString();
     content.should.equal(expected);
   });
 
   it('should create a directory for french', function() {
-    expect(fs.statSync(appPath + '/build/fr').isDirectory()).to.be.true;
+    var hasFrenchDir = fs.statSync(appPath + '/build/fr').isDirectory();
+    hasFrenchDir.should.be.true;
   });
 
 });

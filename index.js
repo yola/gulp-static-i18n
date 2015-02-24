@@ -18,11 +18,12 @@ function StaticI18n(target, options, stream) {
 }
 
 
-StaticI18n.prototype.translateFiles = function(fileType, globPattern){
+StaticI18n.prototype.translateFiles = function(fileType, target, globPattern) {
   var deferred = q.defer();
   var translate = this.translator.getStreamTranslator(fileType);
-  vfs.src(this.target.path + globPattern)
+  vfs.src(target + globPattern)
     .pipe(translate)
+    .pipe(vfs.dest(target))
     .on('end', deferred.resolve);
   return deferred.promise;
 };
@@ -37,8 +38,8 @@ StaticI18n.prototype.translate = function(done) {
   this.translator = new Translator(this.options);
 
   var proms = [
-    this.translateFiles('javascript', '/**/*.js'),
-    this.translateFiles('handlebars', '/**/*.hbs')
+    this.translateFiles('javascript', this.target.path, '/**/*.js'),
+    //this.translateFiles('handlebars', '/**/*.hbs')
   ];
 
   q.allSettled(proms)
