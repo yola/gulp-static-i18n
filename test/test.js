@@ -31,7 +31,7 @@ describe('Translator', function(){
   it('should consume translation catalogs', function() {
     var translator = new Translator({localeDir: appPath + '/locale'});
     var locales = translator.getLocales();
-    locales.length.should.equal(2);
+    locales.length.should.equal(3);
   });
 
   it('should translate strings', function() {
@@ -45,6 +45,7 @@ describe('Translator', function(){
     var translate = translator.getStreamTranslator('javascript');
     var count = 0;
     var msgs = [
+      'window.alert(\'Hello World\');\n',
       'window.alert(\'Bonjour tout le monde\');\n',
       'window.alert(\'Olá mundo\');\n',
     ];
@@ -57,7 +58,7 @@ describe('Translator', function(){
     });
 
     var asserAllLangsTranslated = function() {
-      count.should.equal(2);
+      count.should.equal(3);
       done();
     };
 
