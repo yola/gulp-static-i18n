@@ -49,10 +49,11 @@ describe('Translator', function(){
       'window.alert(\'Olá mundo\');\n',
     ];
 
-    var assertTranslation = through(function() {
-      var msg = this.read();
+    var assertTranslation = through.obj(function(msg, enc, callback) {
       msgs.should.include(msg.translation);
       count += 1;
+      this.resume();
+      callback();
     });
 
     var asserAllLangsTranslated = function() {
