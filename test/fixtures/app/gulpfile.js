@@ -13,9 +13,13 @@ gulp.task('build', ['clean'], function(){
     .pipe(gulp.dest('build', { cwd: __dirname }));
 });
 
+var options = {
+  localeDir: __dirname + '/locale'
+};
+
 gulp.task('translate', ['build'], function(){
   return gulp.src(['build'], { cwd: __dirname })
-    .pipe(statici18n());
+    .pipe(statici18n(options));
 });
 
 gulp.task('default', ['translate']);

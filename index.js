@@ -1,12 +1,12 @@
 'use strict';
 
 var fs = require('fs');
-var q = require('q');
-var vfs = require('vinyl-fs');
 var gutil = require('gulp-util');
+var q = require('q');
 var through = require('through2');
+var vfs = require('vinyl-fs');
 
-var translate = require('./lib/translate');
+var Translator = require('./lib/translator');
 var PluginError = gutil.PluginError;
 
 
@@ -18,13 +18,11 @@ function StaticI18n(target, options, stream) {
 }
 
 
-StaticI18n.prototype.translateFiles = function(lang, pattern){
+StaticI18n.prototype.translateFiles = function(fileType, globPattern){
   var deferred = q.defer();
-  var opts = this.options;
-  opts.language = lang;
-  opts.dest = this.target.path;
-  vfs.src(this.target.path + pattern)
-    .pipe(translate(opts))
+  var translate = this.translator.getStreamTranslator(fileType);
+  vfs.src(this.target.path + globPattern)
+    .pipe(translate)
     .on('end', deferred.resolve);
   return deferred.promise;
 };
@@ -35,6 +33,8 @@ StaticI18n.prototype.translate = function(done) {
   if(!this.checkTarget(this.target)){
     return;
   }
+
+  this.translator = new Translator(this.options);
 
   var proms = [
     this.translateFiles('javascript', '/**/*.js'),

@@ -25,7 +25,10 @@
     "translation"
   ],
   "dependencies": {
+    "gettext-parser": "1.x",
     "gulp-util": "3.x",
+    "lodash": "3.x",
+    "map-stream": "0.0.5",
     "q": "1.1.x",
     "through2": "0.6.x",
     "vinyl-fs": "0.3.x"
