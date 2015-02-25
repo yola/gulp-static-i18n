@@ -38,6 +38,7 @@
     "gulp": "3.x",
     "gulp-rimraf": "0.1.x",
     "jsgreat": "*",
+    "jshint": "2.6.x",
     "mocha": "*",
     "should": "5.x"
   }
