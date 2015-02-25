@@ -1,7 +1,8 @@
 'use strict';
 var gulp = require('gulp');
 var clean = require('gulp-rimraf');
-var statici18n = require('../../../');
+
+var statici18n = require('../../../index');
 
 gulp.task('clean', function() {
   return gulp.src(['build'], { cwd: __dirname })

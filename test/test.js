@@ -1,14 +1,14 @@
 'use strict';
 
 var assert = require('chai').assert;
-var statici18n = require('../');
 var stream = require('stream');
 var through = require('through2');
+var vfs = require('vinyl-fs');
+require('chai').should();
+
+var statici18n = require('../index');
 var Translator = require('../lib/translator');
 var TranslatedFile = require('../lib/translated-file');
-var vfs = require('vinyl-fs');
-
-require('chai').should();
 
 var appPath = __dirname + '/fixtures/app';
 
@@ -71,7 +71,7 @@ describe('Translator', function(){
 
 
 describe('Translated File', function() {
-  it('should be able create lang prefixes from catalog names', function() {
+  it('should create lang prefixes from catalog names', function() {
     var getPrefix = TranslatedFile.getLangPrefix;
     getPrefix('en', 'en').should.equal('');
     getPrefix('pt_BR').should.equal('pt-br/');

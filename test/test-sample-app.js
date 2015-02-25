@@ -1,7 +1,6 @@
 'use strict';
 
 var fs = require('fs');
-
 require('chai').should();
 
 var appPath = __dirname + '/fixtures/app';
@@ -30,7 +29,7 @@ describe('Static translation of an app', function() {
     content.should.equal(expected);
   });
 
-  it('should traslate the js in Portuguese', function () {
+  it('should translate the js in Portuguese', function () {
     var expected = 'window.alert("Olá mundo");\n';
     var content = String(fs.readFileSync(appPath + '/build/pt-br/script.js'));
     content.should.equal(expected);
@@ -42,13 +41,13 @@ describe('Static translation of an app', function() {
     content.should.equal(expected);
   });
 
-  it('should use French for the trans call in the handlebars', function () {
+  it('should translate the handlebars into French', function () {
     var expected = '<h1>Bonjour tout le monde</h1>\n';
     var content = String(fs.readFileSync(appPath + '/build/fr/template.hbs'));
     content.should.equal(expected);
   });
 
-  it('should copy non-supported files into target languages', function () {
+  it('should copy over miscellaneous files', function () {
     var hasTxt = fs.statSync(appPath + '/build/fr/some.txt').isFile();
     hasTxt.should.be.true;
   });

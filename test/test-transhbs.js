@@ -1,7 +1,9 @@
 'use strict';
 
-var transhbs = require('../lib/translators/handlebars');
 require('chai').should();
+
+var transhbs = require('../lib/translators/handlebars');
+
 
 function gettext(str) {
   return str;

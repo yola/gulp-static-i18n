@@ -1,7 +1,8 @@
 'use strict';
 
-var transjs = require('../lib/translators/javascript');
 require('chai').should();
+
+var transjs = require('../lib/translators/javascript');
 
 function gettext(str) {
   return str;
