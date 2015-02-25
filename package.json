@@ -22,6 +22,7 @@
   "keywords": [
     "gulpplugin",
     "i18n",
+    "internationalization",
     "translation"
   ],
   "dependencies": {
