@@ -1,7 +1,7 @@
 'use strict';
 
+var expect = require('chai').expect;
 var fs = require('fs');
-require('chai').should();
 
 var appPath = __dirname + '/fixtures/app';
 var appGulp = require(appPath + '/gulpfile');
@@ -16,40 +16,36 @@ describe('Static translation of an app', function() {
     appGulp.start('default', done);
   });
 
-  it('should create a directory for French and Portuguese', function() {
+  it('creates a directory for French and Portuguese', function() {
     var hasFrenchDir = fs.statSync(appPath + '/build/fr').isDirectory();
     var hasPtDir = fs.statSync(appPath + '/build/pt-br').isDirectory();
-    hasFrenchDir.should.be.true;
-    hasPtDir.should.be.true;
+    expect(hasFrenchDir).to.be.true;
+    expect(hasPtDir).to.be.true;
   });
 
-  it('should knockout gettext calls from the js', function () {
-    var expected = 'window.alert("Hello World");\n';
+  it('knocks out gettext calls from the js', function () {
     var content = String(fs.readFileSync(appPath + '/build/script.js'));
-    content.should.equal(expected);
+    expect(content).to.equal('window.alert("Hello World");\n');
   });
 
-  it('should translate the js in Portuguese', function () {
-    var expected = 'window.alert("Olá mundo");\n';
+  it('translates the js in Portuguese', function () {
     var content = String(fs.readFileSync(appPath + '/build/pt-br/script.js'));
-    content.should.equal(expected);
+    expect(content).to.equal('window.alert("Olá mundo");\n');
   });
 
-  it('should knockout gettext calls from the handlebars', function () {
-    var expected = '<h1>Hello World</h1>\n';
+  it('knocks out gettext calls from the handlebars', function () {
     var content = String(fs.readFileSync(appPath + '/build/template.hbs'));
-    content.should.equal(expected);
+    expect(content).to.equal('<h1>Hello World</h1>\n');
   });
 
-  it('should translate the handlebars into French', function () {
-    var expected = '<h1>Bonjour tout le monde</h1>\n';
+  it('translates the handlebars into French', function () {
     var content = String(fs.readFileSync(appPath + '/build/fr/template.hbs'));
-    content.should.equal(expected);
+    expect(content).to.equal('<h1>Bonjour tout le monde</h1>\n');
   });
 
-  it('should copy over miscellaneous files', function () {
+  it('copies over miscellaneous files', function () {
     var hasTxt = fs.statSync(appPath + '/build/fr/some.txt').isFile();
-    hasTxt.should.be.true;
+    expect(hasTxt).to.be.true;
   });
 
 });

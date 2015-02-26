@@ -43,6 +43,9 @@ StaticI18n.prototype.translate = function(done) {
 
 
 StaticI18n.prototype.error = function(msg) {
+  if (!this.stream) {
+    throw new Error(msg);
+  }
   this.stream.emit('error', new PluginError('gulp-static-i18n', msg));
 };
 
