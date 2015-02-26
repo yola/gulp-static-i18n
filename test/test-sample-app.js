@@ -2,9 +2,10 @@
 
 var expect = require('chai').expect;
 var fs = require('fs');
+var path = require('path');
 
-var appPath = __dirname + '/fixtures/app';
-var appGulp = require(appPath + '/gulpfile');
+var appPath = path.join(__dirname, 'fixtures', 'app');
+var appGulp = require(path.join(appPath, 'gulpfile'));
 
 
 // integration tests

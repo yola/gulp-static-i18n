@@ -1,6 +1,9 @@
 'use strict';
-var gulp = require('gulp');
 var del = require('del');
+var gulp = require('gulp');
+var path = require('path');
+
+
 
 var statici18n = require('../../../index');
 
@@ -9,12 +12,12 @@ gulp.task('clean', function(done) {
 });
 
 gulp.task('build', ['clean'], function(){
-  return gulp.src(['src/**'], { cwd: __dirname, base: __dirname + '/src' })
+  return gulp.src(['src/**'], { cwd: __dirname, base: path.join(__dirname, 'src') })
     .pipe(gulp.dest('build', { cwd: __dirname }));
 });
 
 var options = {
-  localeDir: __dirname + '/locale'
+  localeDir: path.join(__dirname, 'locale')
 };
 
 gulp.task('translate', ['build'], function(){
