@@ -1,12 +1,11 @@
 'use strict';
 var gulp = require('gulp');
-var clean = require('gulp-rimraf');
+var del = require('del');
 
 var statici18n = require('../../../index');
 
-gulp.task('clean', function() {
-  return gulp.src(['build'], { cwd: __dirname })
-    .pipe(clean({force: true}));
+gulp.task('clean', function(done) {
+  del(['build'], { cwd: __dirname, force: true }, done);
 });
 
 gulp.task('build', ['clean'], function(){

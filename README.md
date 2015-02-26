@@ -17,12 +17,11 @@ Example gulp file:
 ```js
 'use strict';
 var gulp = require('gulp');
-var clean = require('gulp-rimraf');
+var del = require('del');
 var statici18n = require('gulp-static-i18n');
 
-gulp.task('clean', function() {
-  return gulp.src(['build'])
-    .pipe(clean({force: true}));
+gulp.task('clean', function(cb) {
+  del(['build'], cb);
 });
 
 gulp.task('build', ['clean'], function(){
