@@ -17,7 +17,8 @@
     "test": "npm run-script lint && mocha"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "keywords": [
     "gulpplugin",
