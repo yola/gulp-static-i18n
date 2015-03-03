@@ -103,3 +103,17 @@ The directory that holds the gettext translation catalogs.
 ## License
 
 MIT © [Yola](https://github.com/yola)
+
+
+## Development
+
+Lint and run js tests:
+```
+npm test
+```
+
+To run just the js tests:
+```
+npm install -g mocha
+mocha
+```
