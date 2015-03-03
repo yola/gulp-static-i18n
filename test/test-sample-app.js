@@ -25,7 +25,7 @@ describe('Static translation of an app', function() {
   });
 
   it('knocks out gettext calls from the js', function () {
-    var content = String(fs.readFileSync(appPath + '/build/script.js'));
+    var content = String(fs.readFileSync(appPath + '/build/en/script.js'));
     expect(content).to.equal('window.alert("Hello World");\n');
   });
 
@@ -35,7 +35,7 @@ describe('Static translation of an app', function() {
   });
 
   it('knocks out gettext calls from the handlebars', function () {
-    var content = String(fs.readFileSync(appPath + '/build/template.hbs'));
+    var content = String(fs.readFileSync(appPath + '/build/en/template.hbs'));
     expect(content).to.equal('<h1>Hello World</h1>\n');
   });
 
@@ -47,6 +47,11 @@ describe('Static translation of an app', function() {
   it('copies over miscellaneous files', function () {
     var hasTxt = fs.statSync(appPath + '/build/fr/some.txt').isFile();
     expect(hasTxt).to.be.true;
+  });
+
+  it('clears the original untraslated script', function() {
+    var hasScript = fs.existsSync(appPath + '/build/script.js');
+    expect(hasScript).to.be.false;
   });
 
 });

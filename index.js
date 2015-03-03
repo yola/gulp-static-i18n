@@ -1,5 +1,6 @@
 'use strict';
 
+var del = require('del');
 var fs = require('fs');
 var gutil = require('gulp-util');
 var through = require('through2');
@@ -30,14 +31,25 @@ StaticI18n.prototype.translate = function(done) {
   var translator = new Translator(this.options);
   var translate = translator.getStreamTranslator();
   var targetPath = this.target.path;
+  var stage = this.target.path + '-stage';
+
+  var clearStage = function() {
+    del.sync(stage, {force: true});
+  };
+  var clearAndDone = function() {
+    clearStage();
+    done();
+  };
 
   translator.register(['.js'], transjs);
   translator.register(['.hbs'], transhbs);
 
-  vfs.src(targetPath + '/**/*.*')
+  clearStage();
+  fs.renameSync(targetPath, stage);
+  vfs.src(stage + '/**/*.*')
     .pipe(translate)
     .pipe(vfs.dest(targetPath))
-    .on('end', done);
+    .on('end', clearAndDone);
 
 };
 

@@ -26,6 +26,7 @@
     "translation"
   ],
   "dependencies": {
+    "del": "1.1.x",
     "gettext-parser": "1.x",
     "gulp-util": "3.x",
     "lodash": "3.x",
@@ -35,7 +36,6 @@
   },
   "devDependencies": {
     "chai": "2.x",
-    "del": "1.1.x",
     "gulp": "3.x",
     "jsgreat": "*",
     "jshint": "2.6.x",

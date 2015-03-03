@@ -61,7 +61,7 @@ app
 │   ├── index.html
 │   └── script.js  // alert(gettext("Hello World"));
 ├── index.html
-├── index.js
+├── script.js
 └── locale
     ├── fr
     └── pt_BR
@@ -71,8 +71,9 @@ app
 ```
 app
 ├── build
-|   ├── index.html
-|   ├── script.js  // alert("Hello World");
+│   ├── en
+│   │   ├── index.html
+│   │   └── script.js  // alert("Hello World");
 │   ├── fr
 │   │   ├── index.html
 │   │   └── script.js  // alert("Bonjour tout le monde");
@@ -80,7 +81,7 @@ app
 │       ├── index.html
 │       └── script.js  // alert("Olá mundo");
 ├── index.html
-├── index.js
+├── script.js
 └── locale
     ├── fr
     └── pt_BR

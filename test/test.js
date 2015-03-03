@@ -75,11 +75,6 @@ describe('Translated File', function() {
 
   describe('prefixing', function() {
 
-    it('uses an empty string when the lang matches the default', function() {
-      var prefix = TranslatedFile.getLangPrefix('same', 'same');
-      expect(prefix).to.equal('');
-    });
-
     it('creates lang prefixes from translation catalogs', function() {
       var ptPrefix = TranslatedFile.getLangPrefix('pt_BR');
       expect(ptPrefix).to.equal('pt-br/');
