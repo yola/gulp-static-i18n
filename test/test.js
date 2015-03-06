@@ -10,6 +10,11 @@ var Translator = require('../lib/translator');
 var TranslatedFile = require('../lib/translated-file');
 
 var appPath = __dirname + '/fixtures/app';
+var localePath = appPath + '/locale';
+var transOpts = {
+  localeDir: localePath,
+  msgDirs: [localePath]
+};
 
 
 describe('StaticI18n', function(){
@@ -34,19 +39,19 @@ describe('StaticI18n', function(){
 describe('Translator', function(){
 
   it('consumes translation catalogs', function() {
-    var translator = new Translator({localeDir: appPath + '/locale'});
+    var translator = new Translator(transOpts);
     var locales = translator.getLocales();
     expect(locales.length).to.equal(3);
   });
 
   it('translates "Hello World"', function() {
-    var translator = new Translator({localeDir: appPath + '/locale'});
+    var translator = new Translator(transOpts);
     var bonjour = 'Bonjour tout le monde';
     expect(translator.langGettext('fr', 'Hello World')).to.equal(bonjour);
   });
 
   it('is useable through a stream', function(done){
-    var translator = new Translator({localeDir: appPath + '/locale'});
+    var translator = new Translator(transOpts);
     var translate = translator.getStreamTranslator();
     var count = 0;
 

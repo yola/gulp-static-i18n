@@ -36,12 +36,12 @@ describe('Static translation of an app', function() {
 
   it('knocks out gettext calls from the handlebars', function () {
     var content = String(fs.readFileSync(appPath + '/build/en/template.hbs'));
-    expect(content).to.equal('<h1>Hello World</h1>\n');
+    expect(content).to.equal('<h1>Hello World</h1>\n<h2>Thank you very much</h2>\n');
   });
 
   it('translates the handlebars into French', function () {
     var content = String(fs.readFileSync(appPath + '/build/fr/template.hbs'));
-    expect(content).to.equal('<h1>Bonjour tout le monde</h1>\n');
+    expect(content).to.equal('<h1>Bonjour tout le monde</h1>\n<h2>Merci beaucoup</h2>\n');
   });
 
   it('copies over miscellaneous files', function () {

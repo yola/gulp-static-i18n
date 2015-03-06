@@ -15,9 +15,11 @@ gulp.task('build', ['clean'], function(){
   return gulp.src(['src/**'], { cwd: __dirname, base: path.join(__dirname, 'src') })
     .pipe(gulp.dest('build', { cwd: __dirname }));
 });
-
+var localePath = path.join(__dirname, 'locale');
+var nestedMsgPath = path.join(__dirname, 'nested-msgs/locale');
 var options = {
-  localeDir: path.join(__dirname, 'locale')
+  localeDir: localePath,
+  msgDirs: [localePath, nestedMsgPath]
 };
 
 gulp.task('translate', ['build'], function(){
