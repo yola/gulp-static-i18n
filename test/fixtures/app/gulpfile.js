@@ -17,7 +17,8 @@ gulp.task('build', ['clean'], function(){
 var localePath = path.join(__dirname, 'locale');
 var installDepLocalePath = path.join(__dirname, 'installed_deps/locale');
 var options = {
-  localeDirs: [localePath, installDepLocalePath]
+  localeDirs: [localePath, installDepLocalePath],
+  transKeys: ['title']
 };
 
 gulp.task('translate-with-deps', ['build'], function(){

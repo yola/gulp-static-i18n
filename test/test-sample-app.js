@@ -59,6 +59,11 @@ describe('Static translation of an app with two locale directories', function() 
     expect(hasScript).to.be.false;
   });
 
+  it('translates the title in the json data into French', function() {
+    var content = String(fs.readFileSync(appPath + '/build/fr/data.json'));
+    expect(content).to.equal('{"title":"Bonjour tout le monde"}');
+  });
+
 });
 
 describe('Static translation of an app with one locale directory', function() {
