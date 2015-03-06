@@ -20,17 +20,17 @@ var options = {
   localeDirs: [localePath, installDepLocalePath]
 };
 
-gulp.task('translateMultidirs', ['build'], function(){
+gulp.task('translate-with-deps', ['build'], function(){
   return gulp.src(['build'], { cwd: __dirname })
     .pipe(statici18n(options));
 });
 
-gulp.task('translatesingledir', ['build'], function(){
+gulp.task('translate', ['build'], function(){
   return gulp.src(['build'], { cwd: __dirname })
     .pipe(statici18n({localeDirs: [localePath]}));
 });
 
-gulp.task('default', ['translateMultidirs']);
-gulp.task('single', ['translatesingledir']);
+gulp.task('default', ['translate-with-deps']);
+gulp.task('single', ['translate']);
 
 module.exports = gulp;
