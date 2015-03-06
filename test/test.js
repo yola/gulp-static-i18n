@@ -10,10 +10,6 @@ var statici18n = require('../index');
 var Translator = require('../lib/translator');
 var TranslatedFile = require('../lib/translated-file');
 
-var transOpts = {
-  localeDirs: [path.join(__dirname, '/fixtures/app', '/locale')]
-};
-
 
 describe('StaticI18n', function(){
 
@@ -36,20 +32,48 @@ describe('StaticI18n', function(){
 
 describe('Translator', function(){
 
-  it('consumes translation catalogs', function() {
-    var translator = new Translator(transOpts);
+  var baseDir = path.join(__dirname, '/fixtures/app');
+  var singleOptions = {localeDirs: [baseDir + '/locale']};
+  var multiOptions = {
+    localeDirs: [baseDir + '/locale', baseDir + '/installed_deps/locale']
+  };
+  var hello = 'Hello World';
+  var bonjour = 'Bonjour tout le monde';
+
+  var testGetLocales = function(options) {
+    var translator = new Translator(options);
     var locales = translator.getLocales();
     expect(locales.length).to.equal(3);
+  };
+
+  var testFrTranslate = function(options, string, translated) {
+    var translator = new Translator(options);
+    expect(translator.langGettext('fr', string)).to.equal(translated);
+  };
+
+  it('consumes translation catalogs', function() {
+    testGetLocales(singleOptions);
+  });
+
+  it('merges catalogs that belong to the same language', function() {
+    testGetLocales(multiOptions);
   });
 
   it('translates "Hello World"', function() {
-    var translator = new Translator(transOpts);
-    var bonjour = 'Bonjour tout le monde';
-    expect(translator.langGettext('fr', 'Hello World')).to.equal(bonjour);
+    testFrTranslate(singleOptions, hello, bonjour);
   });
 
+  it('prioritizes duplicate messages by catalog first seen', function() {
+    testFrTranslate(multiOptions, hello, bonjour);
+  });
+
+  it('translates msgs from secondarily consumed catalogs', function() {
+    testFrTranslate(multiOptions, 'Thank you very much', 'Merci beaucoup');
+  });
+
+
   it('is useable through a stream', function(done){
-    var translator = new Translator(transOpts);
+    var translator = new Translator(multiOptions);
     var translate = translator.getStreamTranslator();
     var count = 0;
 
@@ -64,7 +88,7 @@ describe('Translator', function(){
       done();
     };
 
-    vfs.src(path.join(__dirname, '/fixtures/app', '/src/*'))
+    vfs.src(path.join(__dirname, '/fixtures/app/src/*'))
       .pipe(translate)
       .pipe(downStreamTransformer)
       .on('end', assertSomeItemsWerePiped);
