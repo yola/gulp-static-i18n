@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var path = require('path');
 
 
-
 var statici18n = require('../../../index');
 
 gulp.task('clean', function(done) {
@@ -21,11 +20,17 @@ var options = {
   localeDirs: [localePath, installDepLocalePath]
 };
 
-gulp.task('translate', ['build'], function(){
+gulp.task('translateMultidirs', ['build'], function(){
   return gulp.src(['build'], { cwd: __dirname })
     .pipe(statici18n(options));
 });
 
-gulp.task('default', ['translate']);
+gulp.task('translatesingledir', ['build'], function(){
+  return gulp.src(['build'], { cwd: __dirname })
+    .pipe(statici18n({localeDirs: [localePath]}));
+});
+
+gulp.task('default', ['translateMultidirs']);
+gulp.task('single', ['translatesingledir']);
 
 module.exports = gulp;
