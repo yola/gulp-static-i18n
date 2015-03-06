@@ -10,13 +10,6 @@ function gettext(str) {
 
 describe('Javascript Translator', function(){
 
-  before(function() {
-    this.gettext = function(str) {
-      return this.str;
-    };
-    this.translate;
-  });
-
   it('replaces a single gettext call', function() {
     var c = 'alert(gettext("Hello World"));';
     var translated = transjs(c, gettext);
