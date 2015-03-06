@@ -4,16 +4,14 @@ var expect = require('chai').expect;
 var stream = require('stream');
 var through = require('through2');
 var vfs = require('vinyl-fs');
+var path = require('path');
 
 var statici18n = require('../index');
 var Translator = require('../lib/translator');
 var TranslatedFile = require('../lib/translated-file');
 
-var appPath = __dirname + '/fixtures/app';
-var localePath = appPath + '/locale';
 var transOpts = {
-  localeDir: localePath,
-  msgDirs: [localePath]
+  localeDirs: [path.join(__dirname, '/fixtures/app', '/locale')]
 };
 
 
@@ -66,7 +64,7 @@ describe('Translator', function(){
       done();
     };
 
-    vfs.src(appPath + '/src/*')
+    vfs.src(path.join(__dirname, '/fixtures/app', '/src/*'))
       .pipe(translate)
       .pipe(downStreamTransformer)
       .on('end', assertSomeItemsWerePiped);

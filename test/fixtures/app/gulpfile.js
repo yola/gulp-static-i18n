@@ -16,10 +16,9 @@ gulp.task('build', ['clean'], function(){
     .pipe(gulp.dest('build', { cwd: __dirname }));
 });
 var localePath = path.join(__dirname, 'locale');
-var nestedMsgPath = path.join(__dirname, 'installed_deps/locale');
+var installDepLocalePath = path.join(__dirname, 'installed_deps/locale');
 var options = {
-  localeDir: localePath,
-  msgDirs: [localePath, nestedMsgPath]
+  localeDirs: [localePath, installDepLocalePath]
 };
 
 gulp.task('translate', ['build'], function(){
