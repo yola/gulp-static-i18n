@@ -3,7 +3,7 @@
 ## 0.0.2
 
 * Allow sourcing of PO files from Multiple directories.
-Change `localeDir` to `localeDirs` in options object passed
+* Change `localeDir` to `localeDirs` in options object passed
 to `Translator`.
 
 ## 0.0.1
