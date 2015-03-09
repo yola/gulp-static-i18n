@@ -4,12 +4,11 @@ var expect = require('chai').expect;
 var stream = require('stream');
 var through = require('through2');
 var vfs = require('vinyl-fs');
+var path = require('path');
 
 var statici18n = require('../index');
 var Translator = require('../lib/translator');
 var TranslatedFile = require('../lib/translated-file');
-
-var appPath = __dirname + '/fixtures/app';
 
 
 describe('StaticI18n', function(){
@@ -32,42 +31,69 @@ describe('StaticI18n', function(){
 
 
 describe('Translator', function(){
+  var baseDir = path.join(__dirname, '/fixtures/app');
+  var hello = 'Hello World';
+  var bonjour = 'Bonjour tout le monde';
 
-  it('consumes translation catalogs', function() {
-    var translator = new Translator({localeDir: appPath + '/locale'});
-    var locales = translator.getLocales();
-    expect(locales.length).to.equal(3);
-  });
+  describe('single locale directory', function() {
+    var options = {localeDirs: [baseDir + '/locale']};
 
-  it('translates "Hello World"', function() {
-    var translator = new Translator({localeDir: appPath + '/locale'});
-    var bonjour = 'Bonjour tout le monde';
-    expect(translator.langGettext('fr', 'Hello World')).to.equal(bonjour);
-  });
-
-  it('is useable through a stream', function(done){
-    var translator = new Translator({localeDir: appPath + '/locale'});
-    var translate = translator.getStreamTranslator();
-    var count = 0;
-
-    var downStreamTransformer = through.obj(function(obj, enc, callback) {
-      count += 1;
-      this.resume();
-      callback();
+    it('consumes translation catalogs', function() {
+      var translator = new Translator(options);
+      var locales = translator.getLocales();
+      expect(locales.length).to.equal(3);
     });
 
-    var assertSomeItemsWerePiped = function() {
-      expect(count).to.not.equal(0);
-      done();
-    };
-
-    vfs.src(appPath + '/src/*')
-      .pipe(translate)
-      .pipe(downStreamTransformer)
-      .on('end', assertSomeItemsWerePiped);
-
+    it('translates "Hello World"', function() {
+      var translator = new Translator(options);
+      expect(translator.langGettext('fr', hello)).to.equal(bonjour);
+    });
   });
 
+  describe('multiple locale directories', function() {
+    var options = {
+      localeDirs: [baseDir + '/locale', baseDir + '/installed_deps/locale']
+    };
+
+    it('merges catalogs that belong to the same language', function() {
+      var translator = new Translator(options);
+      var locales = translator.getLocales();
+      expect(locales.length).to.equal(3);
+    });
+
+    it('prioritizes duplicate messages by catalog first seen', function() {
+      var translator = new Translator(options);
+      expect(translator.langGettext('fr', hello)).to.equal(bonjour);
+    });
+
+    it('translates msgs from secondarily consumed catalogs', function() {
+      var translator = new Translator(options);
+      expect(translator.langGettext('fr', 'Thank you very much')).to.equal('Merci beaucoup');
+    });
+
+    it('is useable through a stream', function(done){
+      var translator = new Translator(options);
+      var translate = translator.getStreamTranslator();
+      var count = 0;
+
+      var downStreamTransformer = through.obj(function(obj, enc, callback) {
+        count += 1;
+        this.resume();
+        callback();
+      });
+
+      var assertSomeItemsWerePiped = function() {
+        expect(count).to.not.equal(0);
+        done();
+      };
+
+      vfs.src(path.join(__dirname, '/fixtures/app/src/*'))
+        .pipe(translate)
+        .pipe(downStreamTransformer)
+        .on('end', assertSomeItemsWerePiped);
+
+    });
+  });
 });
 
 
