@@ -37,10 +37,10 @@ gulp.task('translate', ['build'], function(){
 module.exports = gulp;
 ```
 
-### What happens on disk
+### What happens:
 
-The source is copied for each language present in each locale directory. Every
-file is pruned for translation calls.
+`po` files are catalogued/merged from each locale directory, then used
+for translation calls.
 
 Example:
 
@@ -97,10 +97,9 @@ app
 Type: `Array`
 Default: `['locale']`
 
-An array of the [paths to] directories that hold the gettext translation catalogs.
-The first directory in the array will be used as the canonical locale directory for
-determining which languages are supported. When two directories have translations
-for the same string that differ, the directory with the lower index will be used.
+Array of [paths to] locale directories. The directory at index 0 is used as the
+canonical list of supported languages. When two directories have conflicting
+translations the lower indexed directory will be used.
 
 ## License
 
