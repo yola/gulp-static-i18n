@@ -39,7 +39,7 @@ module.exports = gulp;
 
 ### What happens on disk
 
-The source is copied for each language present in the locale directory. Every
+The source is copied for each language present in each locale directory. Every
 file is pruned for translation calls.
 
 Example:
@@ -92,13 +92,15 @@ app
 
 ### options
 
-#### localeDir
+#### localeDirs
 
-Type: `str`  
-Default: `locale`
+Type: `Array`
+Default: `['locale']`
 
-The directory that holds the gettext translation catalogs.
-
+An array of the [paths to] directories that hold the gettext translation catalogs.
+The first directory in the array will be used as the canonical locale directory for
+determining which languages are supported. When two directories have translations
+for the same string that differ, the directory with the lower index will be used.
 
 ## License
 
