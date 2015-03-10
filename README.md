@@ -37,10 +37,11 @@ gulp.task('translate', ['build'], function(){
 module.exports = gulp;
 ```
 
-### What happens:
+### Creating Language Builds
 
-`po` files are catalogued/merged from each locale directory, then used
-for translation calls.
+`statici18n` consumes source files and puts out versions
+in each language present in the canonical locale directory,
+organized in their own sub-directories.
 
 Example:
 
@@ -97,9 +98,9 @@ app
 Type: `Array`
 Default: `['locale']`
 
-Array of [paths to] locale directories. The directory at index 0 is used as the
-canonical list of supported languages. When two directories have conflicting
-translations the lower indexed directory will be used.
+Array of [paths to] locale directories. The first directory is used as the
+canonical list of supported languages. When two directories have catalogs with
+conflicting translations the directory closer to first is used.
 
 ## License
 
