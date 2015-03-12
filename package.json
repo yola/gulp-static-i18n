@@ -38,7 +38,7 @@
   "devDependencies": {
     "chai": "2.x",
     "gulp": "3.x",
-    "jsgreat": "*",
+    "jsgreat": "0.1.4",
     "jshint": "2.6.x",
     "mocha": "*",
     "should": "5.x"
