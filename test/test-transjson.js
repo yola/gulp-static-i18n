@@ -289,3 +289,36 @@ describe('Key filter', function(){
   });
 
 });
+
+
+describe('Push dotted keys', function(){
+
+  it('updates a queue using an object’s keys', function() {
+    var obj = { a: { b: 'bee'}, c: 'sea' };
+    var queue = [];
+    transjson.pushDotKeys(null, obj, queue);
+    expect(queue).to.deep.equal(['a', 'c']);
+  });
+
+  it('uses a dot to separate nested keys', function() {
+    var obj = { a: { b: 'bee'}, c: 'sea' };
+    var queue = [];
+    transjson.pushDotKeys('a', obj.a, queue);
+    expect(queue).to.deep.equal(['a•b']);
+  });
+
+  it('uses indexes for array values', function() {
+    var a = ['here', 'there', 'everywhere'];
+    var queue = [];
+    transjson.pushDotKeys(null, a, queue);
+    expect(queue).to.deep.equal(['0', '1', '2']);
+  });
+
+  it('uses a dot to separate keys and indexes', function() {
+    var obj = { a: ['here', 'there', 'everywhere'] };
+    var queue = [];
+    transjson.pushDotKeys('a', obj.a, queue);
+    expect(queue).to.deep.equal(['a•0', 'a•1', 'a•2']);
+  });
+
+});
