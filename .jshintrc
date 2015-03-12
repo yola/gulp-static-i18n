@@ -1,1 +1,34 @@
-node_modules/jsgreat/.jshintrc
+{
+  "quotmark": true,
+  "curly": true,
+  "eqeqeq": true,
+  "latedef": true,
+  "undef": true,
+  "unused": "vars",
+  "strict": true,
+  "trailing": true,
+  "node": true,
+  "expr": true,
+  "maxlen": 120,
+  "globals": {
+    "module": true,
+    "require": true,
+    "console": true,
+    "window": true,
+    "document": true,
+    "setTimeout": true,
+    "jQuery": true,
+    "define": true,
+    "gettext": true,
+    "describe": true,
+    "it": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "expect": true,
+    "spyOn": true,
+    "jasmine": true,
+    "loadFixtures": true
+  }
+}
