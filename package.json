@@ -39,7 +39,7 @@
     "chai": "2.x",
     "gulp": "3.x",
     "jsgreat": "*",
-    "jshint": "2.6.x",
+    "jshint": "2.6.3",
     "mocha": "*",
     "should": "5.x"
   }
