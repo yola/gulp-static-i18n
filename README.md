@@ -95,12 +95,53 @@ app
 
 #### localeDirs
 
-Type: `Array`
+Type: `Array`  
 Default: `['locale']`
 
 Array of [paths to] locale directories. The first directory is used as the
 canonical list of supported languages. When two directories have catalogs with
 conflicting translations the directory closer to first is used.
+
+#### jsonKeys
+
+Type: `Array`  
+Default: `[]`
+
+Object keys that require translation. The keys can be nested using a `.` or
+a `#` to indicate an array.
+
+Example, to translate the json:
+```json
+{
+  "flowers": [
+    {"name": "roses", "description": "are red"},
+    {"name": "violets", "description": "are blue"}
+  ],
+  "bugs": [
+    {"name": "bees", "description": "buzz"}
+  ]
+}
+```
+
+Use `['description']` to translate all object descriptions.  For just flower
+descriptions use `['flowers.#.description']`.
+
+#### ignoreKeys
+
+Type: `Array`  
+Default: `null`
+
+Object keys that should be ignored.  These keys override matching `jsonKeys`
+and match anywhere in a nested key. Using example above, if wanting
+to translate all descriptions except for `bugs` use options:
+
+```js
+{
+  jsonKeys: ['description'],
+  ignoreKeys: ['bugs']
+}
+```
+
 
 ## License
 

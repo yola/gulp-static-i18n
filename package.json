@@ -1,6 +1,6 @@
 {
   "name": "gulp-static-i18n",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gulp plugin to translate static assets.",
   "license": "MIT",
   "repository": "yola/gulp-static-i18n",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "chai": "2.x",
     "gulp": "3.x",
-    "jsgreat": "*",
+    "jsgreat": "0.1.4",
     "jshint": "2.6.x",
     "mocha": "*",
     "should": "5.x"

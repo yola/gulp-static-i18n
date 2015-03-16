@@ -8,6 +8,7 @@ var vfs = require('vinyl-fs');
 
 var transhbs = require('./lib/translators/handlebars');
 var transjs = require('./lib/translators/javascript');
+var transjson = require('./lib/translators/json');
 var Translator = require('./lib/translator');
 
 var PluginError = gutil.PluginError;
@@ -43,6 +44,7 @@ StaticI18n.prototype.translate = function(done) {
 
   translator.register(['.js'], transjs);
   translator.register(['.hbs'], transhbs);
+  translator.register(['.json'], transjson.configure(this.options));
 
   clearStage();
   fs.renameSync(targetPath, stage);
