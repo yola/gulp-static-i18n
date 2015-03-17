@@ -1,4 +1,6 @@
-# Static Internationalization [![Build Status](https://travis-ci.org/yola/gulp-static-i18n.svg?branch=master)](https://travis-ci.org/yola/gulp-static-i18n)
+# Static Internationalization
+[![Build Status](https://travis-ci.org/yola/gulp-static-i18n.svg?branch=master)](https://travis-ci.org/yola/gulp-static-i18n)
+[![npm version](https://badge.fury.io/js/gulp-static-i18n.svg)](http://badge.fury.io/js/gulp-static-i18n)
 
 > Gulp plugin to translate static assets.
 
