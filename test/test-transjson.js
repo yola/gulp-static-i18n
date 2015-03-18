@@ -297,8 +297,8 @@ describe('Key filter', function(){
 
     it('approves each yes key', function() {
       expect(kf('some•yes•please')).to.be.true;
-      //expect(kf('some•0•name')).to.be.true;
-      //expect(kf('a•long•key•with.a•yep')).to.be.true;
+      expect(kf('some•0•name')).to.be.true;
+      expect(kf('a•long•key•with.a•yep')).to.be.true;
     });
 
     it('denies partial yes keys', function() {
