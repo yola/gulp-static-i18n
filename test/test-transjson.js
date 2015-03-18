@@ -282,6 +282,13 @@ describe('Key filter', function(){
     var o = [{v: 'v', t: 'a'}, {v: 'v', t: 'b'}, {v: 'v', t: 'c'}];
     var kf = transjson.getKeyFilter(['#.v(t=a|b)']);
     expect(kf('0•v', o)).to.be.true;
+    expect(kf('1•v', o)).to.be.true;
+  });
+
+  it('denides with a sibling test with an or value does’t match', function() {
+    var o = [{v: 'v', t: 'a'}, {v: 'v', t: 'b'}, {v: 'v', t: 'c'}];
+    var kf = transjson.getKeyFilter(['#.v(t=a|b)']);
+    expect(kf('2•v', o)).to.be.false;
   });
 
   describe('using multiple keys', function () {
