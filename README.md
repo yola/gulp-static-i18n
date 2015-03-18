@@ -121,12 +121,26 @@ Example, to translate the json:
   ],
   "bugs": [
     {"name": "bees", "description": "buzz"}
+  ],
+  "items": [
+    {"item": "title", "value": "some title"},
+    {"item": "count", "value": 4},
+    {"item": "description", "value": "some description"},
+    {"item": "test", "value": true}
   ]
 }
 ```
 
 Use `['description']` to translate all object descriptions.  For just flower
 descriptions use `['flowers.#.description']`.
+
+When translating an array of items, it is somtimes necessary to evaluate a
+sibling key to determine if the object value requires translation.
+
+Example: to translate all item values that are titles, use:
+`['items.#.value(item=title)']`.  To translate items values that are
+titles or descriptions, use:
+`['items.#.value(item=title|description)']`
 
 #### ignoreKeys
 
