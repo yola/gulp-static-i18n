@@ -1,5 +1,11 @@
 # gulp-static-i18n changelog
 
+## 0.0.4
+
+* Add support for sibling value tests for translating json ([#10][10])
+
+[10]: https://github.com/yola/gulp-static-i18n/pull/10
+
 ## 0.0.3
 
 * Add support for translating json ([#8][8])
