@@ -158,6 +158,13 @@ to translate all descriptions except for `bugs` use options:
 }
 ```
 
+#### formatSpaces
+
+Type: `Int`  
+Default: 0
+
+Number of spaces to use when writing out json.
+
 
 ## License
 
