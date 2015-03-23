@@ -134,13 +134,13 @@ Example, to translate the json:
 Use `['description']` to translate all object descriptions.  For just flower
 descriptions use `['flowers.#.description']`.
 
-When translating an array of items, it is somtimes necessary to evaluate a
-sibling key to determine if the object value requires translation.
+When translating an array of items, it is sometimes necessary to select
+based on a value of a child key.
 
 Example: to translate all item values that are titles, use:
-`['items.#.value(item=title)']`.  To translate items values that are
+`items.#[item=title].value`.  To translate items values that are
 titles or descriptions, use:
-`['items.#.value(item=title|description)']`
+`items.#[item=title|description].value`
 
 #### ignoreKeys
 
