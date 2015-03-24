@@ -1,5 +1,13 @@
 # gulp-static-i18n changelog
 
+## 0.0.5
+
+* Add option to format output json ([#12][12])
+* Bugfix translating falsy values
+
+[12]: https://github.com/yola/gulp-static-i18n/pull/12
+
+
 ## 0.0.4
 
 * Add support for sibling value tests for translating json ([#10][10])

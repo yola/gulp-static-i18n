@@ -48,6 +48,17 @@ describe('Translator', function(){
       var translator = new Translator(options);
       expect(translator.langGettext('fr', hello)).to.equal(bonjour);
     });
+
+    it('returns null for null', function() {
+      var translator = new Translator(options);
+      expect(translator.langGettext('fr', null)).to.equal(null);
+    });
+
+    it('returns empty string for empty string', function() {
+      var translator = new Translator(options);
+      expect(translator.langGettext('fr', '')).to.equal('');
+    });
+
   });
 
   describe('multiple locale directories', function() {
