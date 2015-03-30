@@ -126,6 +126,20 @@ describe('JSON Translator', function(){
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
+  it('translates using config keys that use sibling tests', function() {
+    var obj = [
+      {i18n: true, str: 'Hello world'},
+      {i18n: false, str: 'goodbye'}
+    ];
+    var expected = [
+      {i18n: true, str: 'Olá mundo'},
+      {i18n: false, str: 'goodbye'}
+    ];
+    var str = JSON.stringify(obj);
+    var options = {jsonKeys: ['#.str(i18n=true)'] };
+    var translated = transjson(options, str, gettext);
+    expect(translated).to.equal(JSON.stringify(expected));
+  });
 
 });
 
