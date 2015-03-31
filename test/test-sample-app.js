@@ -64,9 +64,9 @@ describe('Static translation of an app with two locale directories', function() 
     expect(content).to.contain('"title":"Bonjour tout le monde"');
   });
 
-  it('prefixes the url in the json data with french language code', function() {
-    var content = String(fs.readFileSync(appPath + '/build/fr/data.json'));
-    expect(content).to.contain('"resource":"/fr/some/path"');
+  it('prefixes the url in the json data with Portuguese language code', function() {
+    var content = String(fs.readFileSync(appPath + '/build/pt-br/data.json'));
+    expect(content).to.contain('"resource":"/pt-br/some/path"');
   });
 });
 
