@@ -1,5 +1,11 @@
 # gulp-static-i18n changelog
 
+## v0.0.7
+
+* Add support for prefixing urls with language-code in json ([#15][15])
+
+[15]: https://github.com/yola/gulp-static-i18n/pull/15
+
 ## v0.0.6
 
 * Bugfix for sibling tests is json translation([#14][14])
