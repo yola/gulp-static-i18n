@@ -142,6 +142,15 @@ Example: to translate all item values that are titles, use:
 titles or descriptions, use:
 `['items.#.value(item=title|description)']`
 
+#### urlKeys
+
+Type: `Array`  
+Default: `[]`
+
+Object keys of urls that require prefixing with language codes. These keys
+follow the same rules and use the same syntax as `jsonKeys`, except `ignoreKeys`
+will not ignore any `urlKeys`.
+
 #### ignoreKeys
 
 Type: `Array`  
