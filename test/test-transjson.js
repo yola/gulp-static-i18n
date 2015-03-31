@@ -18,15 +18,22 @@ describe('JSON Translator', function(){
 
   it('does nothing when not given keys to translate', function() {
     var str = '{"some": "json" }';
-    var translated = transjson({}, str, gettext);
+    var translated = transjson({}, str, gettext, 'es');
     expect(translated).to.equal(str);
   });
 
   it('translates a given object key', function() {
     var str = '{"description":"Hello world", "not":"this"}';
     var options = {jsonKeys: ['description'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal('{"description":"Olá mundo","not":"this"}');
+  });
+
+  it('prefixes matching urlKey values with the language code', function() {
+    var str = '{"resource":"/some/resource/path"}';
+    var options = { urlKeys: ['resource'] };
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal('{"resource":"/es/some/resource/path"}');
   });
 
   it('translates keys of nested objects', function() {
@@ -50,9 +57,34 @@ describe('JSON Translator', function(){
     };
     var str = JSON.stringify(obj);
     var options = {jsonKeys: ['description'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });
+
+  it('prefixes urls of nested objects', function() {
+    var obj = {
+      image: '/some/image/path',
+      not: 'this',
+      some: {
+        nested: {
+          image: '/another/image'
+        }
+      }
+    };
+    var expected = {
+      image: '/es/some/image/path',
+      not: 'this',
+      some: {
+        nested: {
+          image: '/es/another/image'
+        }
+      }
+    };
+    var str = JSON.stringify(obj);
+    var options = { urlKeys: ['image'] };
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(JSON.stringify(expected));
+   });
 
   it('translates only the nested key', function() {
     var obj = {
@@ -73,7 +105,32 @@ describe('JSON Translator', function(){
     };
     var str = JSON.stringify(obj);
     var options = {jsonKeys: ['nested.description'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(JSON.stringify(expected));
+  });
+
+  it('prefixes only the nested url', function() {
+    var obj = {
+      image: '/some/image/path',
+      not: 'this',
+      some: {
+        nested: {
+          image: '/another/image'
+        }
+      }
+    };
+    var expected = {
+      image: '/some/image/path',
+      not: 'this',
+      some: {
+        nested: {
+          image: '/es/another/image'
+        }
+      }
+    };
+    var str = JSON.stringify(obj);
+    var options = { urlKeys: ['nested.image'] };
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
@@ -96,7 +153,32 @@ describe('JSON Translator', function(){
     };
     var str = JSON.stringify(obj);
     var options = {jsonKeys: ['description'], ignoreKeys: ['some'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(JSON.stringify(expected));
+  });
+
+  it('prefixes urls nested under an ignored key', function() {
+    var obj = {
+      description: 'Hello world',
+      some: {
+        nested: {
+          description: 'goodbye',
+          script: '/some/script/path'
+        }
+      }
+    };
+    var expected = {
+      description: 'Olá mundo',
+      some: {
+        nested: {
+          description: 'goodbye',
+          script: '/es/some/script/path'
+        }
+      }
+    };
+    var str = JSON.stringify(obj);
+    var options = { jsonKeys: ['description'], ignoreKeys: ['some'], urlKeys: ['nested.script'] };
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
@@ -113,7 +195,28 @@ describe('JSON Translator', function(){
     ];
     var str = JSON.stringify(obj);
     var options = {jsonKeys: ['description'], ignoreKeys: ['some'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(JSON.stringify(expected));
+  });
+
+  it('prefixes an array of urls', function() {
+    var obj = [
+      { testing: '/a/path' },
+      { some: { resource: '/another/path' } },
+      { other: { description: 'goodbye' } }
+    ];
+    var expected = [
+      { testing: '/es/a/path' },
+      { some: { resource: '/es/another/path' } },
+      { other: { description: 'adiós' } }
+    ];
+    var str = JSON.stringify(obj);
+    var options = {
+      jsonKeys: ['description'],
+      urlKeys: ['testing', 'resource'],
+      ignoreKeys: ['some']
+    };
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
@@ -122,7 +225,16 @@ describe('JSON Translator', function(){
     var expected = { description: ['Olá mundo', 'adiós'] };
     var str = JSON.stringify(obj);
     var options = {jsonKeys: ['description.#'] };
-    var translated = transjson(options, str, gettext);
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(JSON.stringify(expected));
+  });
+
+  it('prefixes all urls in an array at a urlKey', function() {
+    var obj = { uri: ['/one/path', 'two/path'] };
+    var expected = { uri: ['/es/one/path', '/es/two/path'] };
+    var str = JSON.stringify(obj);
+    var options = { urlKeys: ['uri.#'] };
+    var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
