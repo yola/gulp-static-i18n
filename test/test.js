@@ -8,7 +8,6 @@ var path = require('path');
 
 var statici18n = require('../index');
 var Translator = require('../lib/translator');
-var TranslatedFile = require('../lib/translated-file');
 
 
 describe('StaticI18n', function(){
@@ -105,20 +104,4 @@ describe('Translator', function(){
 
     });
   });
-});
-
-
-describe('Translated File', function() {
-
-  describe('prefixing', function() {
-
-    it('creates lang prefixes from translation catalogs', function() {
-      var ptPrefix = TranslatedFile.getLangPrefix('pt_BR');
-      expect(ptPrefix).to.equal('pt-br/');
-      var dePrefix = TranslatedFile.getLangPrefix('de-Latn_DE-1996');
-      expect(dePrefix).to.equal('de-latn-de-1996/');
-    });
-
-  });
-
 });

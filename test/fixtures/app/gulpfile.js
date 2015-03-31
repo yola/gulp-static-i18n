@@ -18,6 +18,7 @@ var localePath = path.join(__dirname, 'locale');
 var installDepLocalePath = path.join(__dirname, 'installed_deps/locale');
 var options = {
   localeDirs: [localePath, installDepLocalePath],
+  urlKeys: ['resource'],
   jsonKeys: ['title']
 };
 
