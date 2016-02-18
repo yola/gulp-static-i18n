@@ -2,7 +2,7 @@
 
 ## v0.0.8
 
-* Pin Mocha
+* Pin all dependencies to minor versions
 
 ## v0.0.7
 
