@@ -11,7 +11,7 @@ var appGulp = require(path.join(appPath, 'gulpfile'));
 // integration tests
 
 
-describe('Static translation of an app with two locale directories', function() {
+describe('Static translation of app with two locale directories', function() {
 
   before(function(done){
     appGulp.start('default', done);
@@ -36,12 +36,14 @@ describe('Static translation of an app with two locale directories', function() 
 
   it('knocks out gettext calls from the handlebars', function () {
     var content = String(fs.readFileSync(appPath + '/build/en/template.hbs'));
-    expect(content).to.equal('<h1>Hello World</h1>\n<h2>Thank you very much</h2>\n');
+    var expected = '<h1>Hello World</h1>\n<h2>Thank you very much</h2>\n';
+    expect(content).to.equal(expected);
   });
 
   it('translates the handlebars into French', function () {
     var content = String(fs.readFileSync(appPath + '/build/fr/template.hbs'));
-    expect(content).to.equal('<h1>Bonjour tout le monde</h1>\n<h2>Merci beaucoup</h2>\n');
+    var expected = '<h1>Bonjour tout le monde</h1>\n<h2>Merci beaucoup</h2>\n';
+    expect(content).to.equal(expected);
   });
 
   it('prioritizes duplicate messages by catalog first seen', function () {
@@ -64,7 +66,7 @@ describe('Static translation of an app with two locale directories', function() 
     expect(content).to.contain('"title":"Bonjour tout le monde"');
   });
 
-  it('prefixes the url in the json data with Portuguese language code', function() {
+  it('prefixes url in the json data with Portuguese language code', function() {
     var content = String(fs.readFileSync(appPath + '/build/pt-br/data.json'));
     expect(content).to.contain('"resource":"/pt-br/some/path"');
   });
@@ -78,6 +80,8 @@ describe('Static translation of an app with one locale directory', function() {
 
   it('only uses po files from the named directory', function () {
     var content = String(fs.readFileSync(appPath + '/build/fr/template.hbs'));
-    expect(content).to.equal('<h1>Bonjour tout le monde</h1>\n<h2>Thank you very much</h2>\n');
+    var expected = '<h1>Bonjour tout le monde</h1>\n' +
+      '<h2>Thank you very much</h2>\n';
+    expect(content).to.equal(expected);
   });
 });

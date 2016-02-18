@@ -11,7 +11,10 @@ gulp.task('clean', function(done) {
 });
 
 gulp.task('build', ['clean'], function(){
-  return gulp.src(['src/**'], { cwd: __dirname, base: path.join(__dirname, 'src') })
+  return gulp.src(['src/**'], {
+      cwd: __dirname,
+      base: path.join(__dirname, 'src')
+    })
     .pipe(gulp.dest('build', { cwd: __dirname }));
 });
 var localePath = path.join(__dirname, 'locale');
