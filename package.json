@@ -40,7 +40,7 @@
     "gulp": "3.x",
     "jsgreat": "0.1.4",
     "jshint": "2.6.x",
-    "mocha": "*",
+    "mocha": "2.4.x",
     "should": "5.x"
   }
 }
