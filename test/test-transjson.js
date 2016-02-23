@@ -177,7 +177,11 @@ describe('JSON Translator', function(){
       }
     };
     var str = JSON.stringify(obj);
-    var options = { jsonKeys: ['description'], ignoreKeys: ['some'], urlKeys: ['nested.script'] };
+    var options = {
+      jsonKeys: ['description'],
+      ignoreKeys: ['some'],
+      urlKeys: ['nested.script']
+    };
     var translated = transjson(options, str, gettext, 'es');
     expect(translated).to.equal(JSON.stringify(expected));
   });

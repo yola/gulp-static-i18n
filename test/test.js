@@ -78,7 +78,8 @@ describe('Translator', function(){
 
     it('translates msgs from secondarily consumed catalogs', function() {
       var translator = new Translator(options);
-      expect(translator.langGettext('fr', 'Thank you very much')).to.equal('Merci beaucoup');
+      expect(translator.langGettext('fr', 'Thank you very much'))
+        .to.equal('Merci beaucoup');
     });
 
     it('is useable through a stream', function(done){

@@ -1,5 +1,9 @@
 # gulp-static-i18n changelog
 
+## v0.0.8
+
+* Pin all dependencies to minor versions
+
 ## v0.0.7
 
 * Add support for prefixing urls with language-code in json ([#15][15])
