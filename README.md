@@ -100,8 +100,9 @@ app
 Type: `string|null`  
 Default: `'en'`
 
-Default language. Generates translation from values of `msgid` instead of 
-`msgstr`. Value of `null` prevents translation to default language.
+If a default language is set, an additional language build will be created
+that uses each `msgid` as the translated value. Use `null` to short-circuit
+this behavior.
 
 #### localeDirs
 
