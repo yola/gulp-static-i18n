@@ -85,3 +85,15 @@ describe('Static translation of an app with one locale directory', function() {
     expect(content).to.equal(expected);
   });
 });
+
+describe('Static translation with a nullified `defaultLang`', function() {
+
+  before(function(done){
+    appGulp.start('translate-with-null-default-lang', done);
+  });
+
+  it('does not have an english output', function () {
+    var hasEnDir = fs.existsSync(appPath + '/build/en');
+    expect(hasEnDir).to.be.false;
+  });
+});

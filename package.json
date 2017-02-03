@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "chai": "~2.3.0",
+    "clone": "~2.1.0",
     "gulp": "~3.9.1",
     "jsgreat": "~0.1.7",
     "jshint": "~2.6.3",

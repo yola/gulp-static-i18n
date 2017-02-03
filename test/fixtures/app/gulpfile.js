@@ -1,4 +1,5 @@
 'use strict';
+var clone = require('clone');
 var del = require('del');
 var gulp = require('gulp');
 var path = require('path');
@@ -25,14 +26,21 @@ var options = {
   jsonKeys: ['title']
 };
 
+gulp.task('translate', ['build'], function(){
+  return gulp.src(['build'], { cwd: __dirname })
+    .pipe(statici18n({localeDirs: [localePath]}));
+});
+
 gulp.task('translate-with-deps', ['build'], function(){
   return gulp.src(['build'], { cwd: __dirname })
     .pipe(statici18n(options));
 });
 
-gulp.task('translate', ['build'], function(){
+gulp.task('translate-with-null-default-lang', ['build'], function(){
+  var opts = clone(options);
+  opts.defaultLang = null;
   return gulp.src(['build'], { cwd: __dirname })
-    .pipe(statici18n({localeDirs: [localePath]}));
+    .pipe(statici18n(opts));
 });
 
 gulp.task('default', ['translate-with-deps']);
