@@ -95,6 +95,14 @@ app
 
 ### options
 
+#### defaultLang
+
+Type: `string|null`  
+Default: `'en'`
+
+Default language. Generates translation from values of `msgid` instead of 
+`msgstr`. Value of `null` prevents translation to default language.
+
 #### localeDirs
 
 Type: `Array`  
