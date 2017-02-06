@@ -95,6 +95,15 @@ app
 
 ### options
 
+#### defaultLang
+
+Type: `string|null`  
+Default: `'en'`
+
+If a default language is set, an additional language build will be created
+that uses each `msgid` as the translated value. Use `null` to short-circuit
+this behavior.
+
 #### localeDirs
 
 Type: `Array`  
