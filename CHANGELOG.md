@@ -1,5 +1,9 @@
 # gulp-static-i18n changelog
 
+## v0.0.9
+
+* Update `defaultLang` to accept `null` and document behavior.
+
 ## v0.0.8
 
 * Pin all dependencies to minor versions
