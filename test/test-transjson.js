@@ -257,8 +257,15 @@ describe('JSON Translator', function(){
     expect(translated).to.equal(JSON.stringify(expected));
   });
 
-});
+  it('translates keys containing literal dots', function() {
+    var str = '{"a.b.c": "Hello world", "a": {"b": {"c": "nope"}}}';
+    var options = {jsonKeys: ['a\\.b\\.c']};
+    var translated = transjson(options, str, gettext, 'es');
+    expect(translated).to.equal(
+      '{"a.b.c":"Olá mundo","a":{"b":{"c":"nope"}}}');
+  });
 
+});
 
 describe('Dotted object', function(){
 
