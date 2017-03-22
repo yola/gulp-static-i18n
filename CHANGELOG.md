@@ -1,6 +1,6 @@
 # gulp-static-i18n changelog
 
-## Dev
+## 0.1.0
 
 * Add support for handling translating keys with dots ([#26][])
 
