@@ -29,10 +29,10 @@
   "dependencies": {
     "del": "~5.1.0",
     "gettext-parser": "~4.0.3",
-    "gulp-util": ">=3.0.7",
     "lodash": "~4.17.15",
     "through2": "~3.0.1",
     "vinyl": "~2.2.0",
+    "plugin-error": "~1.0.1",
     "vinyl-fs": "~3.0.3"
   },
   "devDependencies": {
