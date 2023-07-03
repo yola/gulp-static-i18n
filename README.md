@@ -26,15 +26,15 @@ gulp.task('clean', function(cb) {
   del(['build'], cb);
 });
 
-gulp.task('build', ['clean'], function(){
+gulp.task('build', gulp.series('clean', function(){
   return gulp.src(['src/**'])
     .pipe(gulp.dest('build'));
-});
+}));
 
-gulp.task('translate', ['build'], function(){
+gulp.task('translate', gulp.series('build', function(){
   return gulp.src(['build'])
     .pipe(statici18n());
-});
+}));
 
 module.exports = gulp;
 ```
