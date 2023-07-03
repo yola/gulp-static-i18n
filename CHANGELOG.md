@@ -7,7 +7,7 @@
 **Breaking changes**
 
 Change required node version (>=14.21.3). It may work with lower node version,
-but it's tested only on 14.23.1 version.
+but it's tested only with version 14.23.1.
 
 ## 0.1.0
 
