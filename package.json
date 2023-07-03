@@ -1,6 +1,6 @@
 {
   "name": "gulp-static-i18n",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Gulp plugin to translate static assets.",
   "license": "MIT",
   "repository": "yola/gulp-static-i18n",
@@ -10,7 +10,7 @@
     "url": "https://github.com/yola"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=14.21.3"
   },
   "scripts": {
     "lint": "jshint lib test index.js",
@@ -28,20 +28,20 @@
   ],
   "dependencies": {
     "del": "~1.1.1",
-    "gettext-parser": "~1.1.2",
-    "gulp-util": "~3.0.7",
-    "lodash": "~3.10.1",
-    "through2": "~0.6.5",
-    "vinyl": "~0.4.6",
-    "vinyl-fs": "~0.3.14"
+    "gettext-parser": "~7.0.0",
+    "lodash": "~4.17.21",
+    "plugin-error": "~2.0.1",
+    "through2": "~4.0.0",
+    "vinyl": "~3.0.0",
+    "vinyl-fs": "~3.0.3"
   },
   "devDependencies": {
-    "chai": "~2.3.0",
+    "chai": "~4.3.7",
     "clone": "~2.1.0",
-    "gulp": "~3.9.1",
+    "gulp": "~4.0.2",
     "jsgreat": "~0.1.7",
-    "jshint": "~2.6.3",
-    "mocha": "~2.4.5",
-    "should": "~5.2.0"
+    "jshint": "~2.11.0",
+    "mocha": "~10.2.0",
+    "should": "~13.2.3"
   }
 }

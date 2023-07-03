@@ -1,5 +1,14 @@
 # gulp-static-i18n changelog
 
+## 1.0.0
+
+* Update dependencies
+
+**Breaking changes**
+
+Change required node version (>=14.21.3). It may work with lower node version,
+but it's tested only with version 14.23.1.
+
 ## 0.1.0
 
 * Add support for handling translating keys with dots ([#26][])

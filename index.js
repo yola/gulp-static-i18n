@@ -2,16 +2,15 @@
 
 var del = require('del');
 var fs = require('fs');
-var gutil = require('gulp-util');
 var through = require('through2');
 var vfs = require('vinyl-fs');
+var PluginError = require('plugin-error');
 
 var transhbs = require('./lib/translators/handlebars');
 var transjs = require('./lib/translators/javascript');
 var transjson = require('./lib/translators/json');
-var Translator = require('./lib/translator');
 
-var PluginError = gutil.PluginError;
+var Translator = require('./lib/translator');
 
 
 function StaticI18n(target, options, stream) {
