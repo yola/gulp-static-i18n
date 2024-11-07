@@ -1,5 +1,9 @@
 # gulp-static-i18n changelog
 
+## 1.0.1
+
+* Bump up `del` to 1.2.1
+
 ## 1.0.0
 
 * Update dependencies

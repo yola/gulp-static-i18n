@@ -1,6 +1,6 @@
 {
   "name": "gulp-static-i18n",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gulp plugin to translate static assets.",
   "license": "MIT",
   "repository": "yola/gulp-static-i18n",
@@ -27,7 +27,7 @@
     "translation"
   ],
   "dependencies": {
-    "del": "~1.1.1",
+    "del": "1.2.1",
     "gettext-parser": "~7.0.0",
     "lodash": "~4.17.21",
     "plugin-error": "~2.0.1",
